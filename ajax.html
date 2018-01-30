@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ajax Homework</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+
+<button data-search="Muhammad Ali"> ALI</button>
+<button data-search="Roberto Duran">Duran</button>
+<button data-search="Sugar Ray Leonard">SRL</button>
+<button data-search="Mike Tyson">Tyson</button>
+<button data-search="Bruce Lee">The Dragon</button>
+
+<script type="text/javascript">
+	$('button').on('click', function(){
+		var x = $(this).data("search");
+		console.log(x);
+
+		var queryUrl = "https://api.giphy.com/v1/gifs/search?q="+x+"&api_key=2bzMw7ok9xld294a0TRVVQwsvc3L7PVD&limit=10";
+		console.log(queryUrl);
+
+		$.ajax({url: queryUrl,method:"GET"})
+			.done(function(response){
+				console.log(response.data[0].rating);
+				console.log(response);
+				$('body').append('<p>rating:' +response.data[9].rating+'</p>');
+				$('body').append("<img src='"+response.data[0].images.downsized.url+"'>");
+				$('body').append("<img src='"+response.data[0].images.downsized_medium.url+"'>");
+
+			})
+	})
+
+
+
+</script>
+
+<body>
+
+</body>
+</html>
